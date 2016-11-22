@@ -9,8 +9,13 @@ var addNote = (title, body) => {
     title,
     body
   }
-  var notesString = fs.readFileSync('data/notes-data.json')
-  notes = JSON.parse(notesString)
+
+  // Checks if file exists
+  try {
+    var notesString = fs.readFileSync('data/notes-data.json')
+    notes = JSON.parse(notesString)
+  } catch (e) {}
+
   notes.push(note)
   fs.writeFileSync('data/notes-data.json', JSON.stringify(notes))
 }
