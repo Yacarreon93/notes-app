@@ -2,19 +2,23 @@ console.log('Starting index.js')
 
 const fs = require('fs')
 const _ = require('lodash')
+const argv = require('yargs').argv
 
 const notes = require('./notes')
 
-var command = process.argv[2]
+var command = argv._[0]
+
+// Prints command args
+// console.log(argv);
 
 if (command === 'add') {
-  console.log('Adding new note');
+  notes.addNote(argv.title, argv.body);
 } else if (command === 'list') {
-  console.log('Listing all notes');
+  notes.getAll()
 } else if (command === 'read') {
-  console.log('Reading note');
+  notes.getNote(argv.title)
 } else if (command === 'remove') {
-  console.log('Removing note');
+  notes.removeNote(argv.title)
 } else {
   console.log('Command not recognized');
 }
