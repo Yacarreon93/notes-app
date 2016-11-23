@@ -20,7 +20,13 @@ if (command === 'add') {
     console.log('The note title already exists');
   }
 } else if (command === 'list') {
-  notes.getAll()
+  var allNotes = notes.getAll()
+  if (allNotes) {
+    console.log('Number of notes:', allNotes.length);
+    allNotes.forEach(note => notes.logNote(note))
+  } else {
+    console.log('There are no notes');
+  }
 } else if (command === 'read') {
   var note = notes.getNote(argv.title)
   if (note) {
